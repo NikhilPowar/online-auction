@@ -1,0 +1,21 @@
+.fileControl {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    bottom: 0;
+    opacity: 0;
+}
+
+.FileProgressCont {
+    width: 100%;
+    float: left;
+    text-align: center
+}
+mat-card{margin: 20px;}
+.example-full-width{
+  width:100%;
+}
+.text-right{
+  text-align: right !important;
+}

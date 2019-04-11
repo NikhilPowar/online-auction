@@ -1,0 +1,29 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title><h2>Products</h2></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+    <mat-list>
+      <!--<h3 md-subheader>Folders</h3>-->
+      <mat-list-item *ngFor="let item of productsArr; let num = index" >
+        <!--{{item | json}}-->
+        <!--<md-icon md-list-avatar>folder</md-icon>-->
+        <h4 mat-line>Title : {{item.Title}}</h4>
+        <p mat-line>Category : {{item.Category}} </p>
+        <p mat-line>Aution End Date : {{item.AutionEndDate}} {{item.AutionEndTime}} </p>
+        <p mat-line>Location : {{item.Location}} </p>
+        <p mat-line>BidStartingAmount : {{item.BidStartingAmount}} </p>
+
+        <span class="example-spacer"></span>
+        <!--<pre>{{item | json}}</pre>-->
+        <button mat-button mat-raised-button color="primary" [routerLink]="['/ProductsDetail', item.key ]" >View</button>
+        <button mat-button mat-raised-button color="danger" *ngIf="canDelete(item)" (click)="delete(item.key)" >Delete</button>
+        <!--<md-divider ></md-divider>-->
+      </mat-list-item>
+
+    </mat-list>
+
+
+  </mat-card-content>
+</mat-card>

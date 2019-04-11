@@ -1,0 +1,137 @@
+<mat-sidenav-container [class.m2app-dark]="isDarkTheme">
+
+  <!--<md-sidenav #sidenav mode="side" class="app-sidenav">
+    Sidenav
+  </md-sidenav>
+
+  <md-toolbar color="primary">
+    <button class="app-icon-button" (click)="sidenav.toggle()">
+      <i class="material-icons app-toolbar-menu">menu</i>
+    </button>
+
+    Angular Material2 Example App
+
+    <span class="app-toolbar-filler"></span>
+    <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE DARK THEME</button>
+  </md-toolbar>-->
+
+  <div class="app-content">
+
+    <mat-card>
+      <button mat-button>FLAT</button>
+      <button mat-raised-button mat-tooltip="This is a tooltip!">RAISED</button>
+      <button mat-raised-button color="primary">PRIMARY RAISED</button>
+      <button mat-raised-button color="accent">ACCENT RAISED</button>
+    </mat-card>
+
+    <mat-card>
+      <mat-checkbox>Unchecked</mat-checkbox>
+      <mat-checkbox [checked]="true">Checked</mat-checkbox>
+      <mat-checkbox [indeterminate]="true">Indeterminate</mat-checkbox>
+      <mat-checkbox [disabled]="true">Disabled</mat-checkbox>
+    </mat-card>
+
+    <mat-card>
+      <mat-radio-button name="symbol">Alpha</mat-radio-button>
+      <mat-radio-button name="symbol">Beta</mat-radio-button>
+      <mat-radio-button name="symbol" disabled>Gamma</mat-radio-button>
+    </mat-card>
+
+    <mat-card class="app-input-section">
+      <input matInput placeholder="First name">
+      <!--</inputmatInput>-->
+
+      <input matInput #nickname placeholder="Nickname" maxlength="50">
+        <mat-hint align="end">
+          {{nickname.characterCount}} / 50
+        </mat-hint>
+      <!--</inputmatInput>-->
+
+      <input matInput>
+        <mat-placeholder>
+          <i class="material-icons app-input-icon">android</i> Favorite phone
+        </mat-placeholder>
+      <!--</inputmatInput>-->
+
+      <input matInput placeholder="Motorcycle model">
+        <span mat-prefix>
+          <i class="material-icons app-input-icon">motorcycle</i>
+          &nbsp;
+        </span>
+      <!--</inputmatInput>-->
+    </mat-card>
+
+    <mat-card>
+      <mat-list class="app-list">
+        <mat-list-item *ngFor="let food of foods">
+          <h3 mat-line>{{food.name}}</h3>
+          <p mat-line class="demo-secondary-text">{{food.rating}}</p>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+
+    <mat-card>
+      <mat-spinner class="app-spinner"></mat-spinner>
+      <mat-spinner color="accent" class="app-spinner"></mat-spinner>
+    </mat-card>
+
+    <mat-card>
+      <label>
+        Indeterminate progress-bar
+        <mat-progress-bar
+            class="app-progress"
+            mode="indeterminate"
+            aria-label="Indeterminate progress-bar example"></mat-progress-bar>
+      </label>
+
+      <label>
+        Determinate progress bar - {{progress}}%
+        <mat-progress-bar
+            class="app-progress"
+            color="accent"
+            mode="determinate"
+            [value]="progress"
+            aria-label="Determinate progress-bar example"></mat-progress-bar>
+      </label>
+    </mat-card>
+
+    <mat-card>
+      <mat-tab-group>
+        <mat-tab label="Earth">
+          <p>EARTH</p>
+        </mat-tab>
+        <mat-tab label="Fire">
+          <p>FIRE</p>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+
+    <mat-card>
+      <mat-icon>build</mat-icon>
+    </mat-card>
+
+    <mat-card>
+      <button mat-button [mat-menu-trigger-for]="menu">
+        MENU
+      </button>
+    </mat-card>
+
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Lemon</button>
+      <button mat-menu-item>Lime</button>
+      <button mat-menu-item>Banana</button>
+    </mat-menu>
+
+    <mat-card>
+      <p>Last dialog result: {{lastDialogResult}}</p>
+      <button mat-raised-button (click)="openDialog()">DIALOG</button>
+      <button mat-raised-button (click)="showSnackbar()">SNACKBAR</button>
+    </mat-card>
+
+  </div>
+
+</mat-sidenav-container>
+
+<span class="app-action" [class.m2app-dark]="isDarkTheme">
+  <button mat-fab><mat-icon>check circle</mat-icon></button>
+</span>

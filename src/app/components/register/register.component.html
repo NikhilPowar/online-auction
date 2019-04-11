@@ -1,0 +1,60 @@
+<mat-grid-list cols="3">
+  <mat-grid-tile colspan="1" rowspan="1">
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="1"  style="height: 150px">
+
+    <form class="example-form" [formGroup]="myForm" (ngSubmit)="onSubmit(myForm.value)">
+
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title><h2>Register</h2></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <mat-input-container class="example-full-width">
+            <input matInput placeholder="First Name" [formControl]="myForm.controls['FirstName']">
+            <mat-hint *ngIf="myForm.controls['FirstName'].touched && myForm.controls['FirstName'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</mat-hint>
+          </mat-input-container>
+
+          <mat-input-container class="example-full-width">
+            <input matInput placeholder="Last Name" [formControl]="myForm.controls['LastName']">
+            <mat-hint *ngIf="myForm.controls['LastName'].touched && myForm.controls['LastName'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</mat-hint>
+          </mat-input-container>
+
+          <mat-input-container class="example-full-width" >
+            <input matInput placeholder="Email" type="email" [formControl]="myForm.controls['Email']">
+            <mat-hint *ngIf="myForm.controls['Email'].touched && myForm.controls['Email'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</mat-hint>
+          </mat-input-container>
+
+          <mat-input-container class="example-full-width">
+            <input matInput placeholder="Password" type="password" [formControl]="myForm.controls['Password']">
+            <mat-hint *ngIf="myForm.controls['Password'].touched && myForm.controls['Password'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</mat-hint>
+          </mat-input-container>
+
+          <mat-input-container class="example-full-width">
+            <input matInput placeholder="Location" [formControl]="myForm.controls['Location']">
+            <mat-hint *ngIf="myForm.controls['Location'].touched && myForm.controls['Location'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</mat-hint>
+          </mat-input-container>
+
+          <br>
+          <br>
+          <mat-form-field class="example-full-width">
+          <mat-select placeholder="Account Type" name="AccountType" [formControl]="myForm.controls['AccountType']">
+            <mat-option value="User" selected>User</mat-option>
+            <mat-hint *ngIf="myForm.controls['AccountType'].touched && myForm.controls['AccountType'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</mat-hint>
+          </mat-select>
+          </mat-form-field>
+
+        </mat-card-content>
+        <mat-card-actions class="text-right padding-right-20 padding-bottom-10">
+          <span class="example-spacer"></span>
+          <button mat-button mat-raised-button color="primary" type="submit">Register</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </form>
+
+  </mat-grid-tile>
+  <mat-grid-tile colspan="1" rowspan="1">
+  </mat-grid-tile>
+</mat-grid-list>
