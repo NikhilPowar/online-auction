@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { UserService } from '../../services/user.service';
 import UserModel from '../../models/user.model';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -37,7 +36,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(value: any): void {
-
     if (!this.myForm.valid) {
       console.log('Form Not Valid');
       return;

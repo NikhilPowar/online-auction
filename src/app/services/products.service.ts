@@ -4,6 +4,7 @@ import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angular
 import { Subject } from 'rxjs/Subject';
 import UserModel from '../models/user.model';
 import ProductModel, { AuctionModel } from '../models/product.model';
+import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
@@ -18,6 +19,9 @@ export class ProductsService {
   product: AngularFireObject<ProductModel>;
   auctions: AngularFireList<AuctionModel>;
 
+  productsArr: Observable<any[]>;
+  auctionsArr: any[];
+
   constructor(public af: AngularFireDatabase) {
     this.productSubject = new Subject<any>();
 
@@ -27,6 +31,9 @@ export class ProductsService {
 
 
     this.products = this.af.list('/products', ref => ref.orderByChild('Category'));
+    this.productsArr = this.products.snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });
   }
 
 
@@ -36,6 +43,9 @@ export class ProductsService {
     } else {
       this.products = this.af.list('/products', ref => ref.orderByChild('Category'));
     }
+    this.productsArr = this.products.snapshotChanges().map(actions => {
+      return actions.map(a => ({ key: a.payload.key, ...a.payload.val() }));
+    });
   }
 
 

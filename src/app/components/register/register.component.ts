@@ -32,6 +32,7 @@ export class RegisterComponent implements OnInit {
 
     userService.UserObservable.subscribe(data => {
       if (data && data.uid) {
+        console.log('Registration successful');
         this.router.navigate(['/Home']);
       }
     });

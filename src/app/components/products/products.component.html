@@ -17,7 +17,7 @@
 
         <span class="example-spacer"></span>
         <!--<pre>{{item | json}}</pre>-->
-        <button mat-button mat-raised-button color="primary" [routerLink]="['/ProductsDetail', item.key ]" >View</button>
+        <button mat-button mat-raised-button color="primary" [routerLink]="['/ProductsDetail', item.key]" >View</button>
         <button mat-button mat-raised-button color="danger" *ngIf="canDelete(item)" (click)="delete(item.key)" >Delete</button>
         <!--<md-divider ></md-divider>-->
       </mat-list-item>

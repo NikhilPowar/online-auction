@@ -44,10 +44,8 @@ export class MyAwardedBidsComponent implements OnInit {
           equalTo: this.user.uid
         });
 
-        this.products = productsService.products;
-
-        this.products.valueChanges().subscribe((obj) => {
-          this.productsArr = obj;
+        productsService.productsArr.subscribe(result => {
+          this.productsArr = result;
         });
       });
     });

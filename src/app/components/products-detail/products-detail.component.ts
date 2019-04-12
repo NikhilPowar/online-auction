@@ -51,7 +51,7 @@ export class ProductsDetailComponent implements OnInit {
 
       this.product.valueChanges().subscribe((data: ProductModel) => {
         this.productDetail = data;
-
+        console.log(this.productDetail);
         this.auctions.valueChanges().subscribe((obj: AuctionModel[]) => {
           this.auctionsDetail = obj;
           this.checkFn();

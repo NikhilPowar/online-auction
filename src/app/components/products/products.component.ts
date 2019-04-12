@@ -55,9 +55,8 @@ export class ProductsComponent implements OnInit {
           productsService.fetchProducts({});
         }
 
-        this.products = productsService.products;
-        this.products.valueChanges().subscribe(obj => {
-          this.productsArr = obj;
+        productsService.productsArr.subscribe(result => {
+          this.productsArr = result;
         });
       });
     });
@@ -81,5 +80,4 @@ export class ProductsComponent implements OnInit {
   delete(uuid: string) {
     this.productsService.deleteProduct(uuid);
   }
-
 }

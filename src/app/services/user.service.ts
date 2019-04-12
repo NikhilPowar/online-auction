@@ -68,8 +68,8 @@ export class UserService {
       userObj.uid = data.uid;
 
       _self.UserFirebaseObservable = _self.af.object('/accounts/' + data.uid);
+      // ToDo: Check for proper login observable
       _self.UserFirebaseObservable.valueChanges().subscribe(obj => {
-
         if (userObj.Email === 'admin@gmail.com' && !obj.uid) {
             obj = {
               uid : userObj.uid,
