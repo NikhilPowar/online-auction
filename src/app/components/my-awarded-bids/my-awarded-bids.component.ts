@@ -64,7 +64,7 @@ export class MyAwardedBidsComponent implements OnInit {
   }
 
   delete(key: string) {
-    const c = confirm('Are you sure you want to delete this product? This action cannot be undone.');
+    const c = confirm('Are you sure you want to delete this product? This action cannot be undone!');
     if (c) {
       this.productsService.deleteProduct(key);
     }
