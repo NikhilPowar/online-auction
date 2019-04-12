@@ -14,7 +14,7 @@
         </li>
 
         <li *ngIf="canShow(user, [userType.Admin, userType.User])">
-          <a routerlinkactive="component-viewer-sidenav-item-selected" [routerLink]="['/Products']" class="">
+          <a routerlinkactive="component-viewer-sidenav-item-selected" [routerLink]="['/Products', user.uid]" class="">
             View My Products
           </a>
         </li>
@@ -25,11 +25,11 @@
           </a>
         </li>
 
-        <!--<li *ngIf="canShow(user, [userType.Admin])">
-            <a routerlinkactive="component-viewer-sidenav-item-selected"  [routerLink]="['/Users']" class="">
-                View All Users
-            </a>
-        </li>-->
+        <li *ngIf="canShow(user, [userType.Admin])">
+          <a routerlinkactive="component-viewer-sidenav-item-selected"  [routerLink]="['/Users']" class="">
+            View All Users
+          </a>
+        </li>
 
       </ul>
 

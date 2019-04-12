@@ -37,11 +37,13 @@ export class ProductsComponent implements OnInit {
         }
 
         if (this.id && Categories.indexOf(<any>this.id) !== -1) {
+          console.log('Fetching products by category...');
           productsService.fetchProducts({
             orderByChild: 'Category',
             equalTo: this.id
           });
         } else if (this.id) {
+          console.log('Fetching products by user...');
           productsService.fetchProducts({
             orderByChild: 'uid',
             equalTo: this.id
