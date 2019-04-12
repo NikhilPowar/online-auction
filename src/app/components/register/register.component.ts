@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import UserModel, { UserTypeArr, UserType } from '../../models/user.model';
+import { UserTypeArr, UserType } from '../../models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -17,8 +16,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     fb: FormBuilder,
     private userService: UserService,
-    private router: Router,
-    private store: Store<UserModel>
+    private router: Router
   ) {
 
     this.myForm = fb.group({

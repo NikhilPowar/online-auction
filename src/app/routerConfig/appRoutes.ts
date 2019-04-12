@@ -1,18 +1,10 @@
-/**
- * Created by Ahmer on 05-Apr-18.
- */
-
 import {  Routes } from '@angular/router';
 
-import { AppComponent } from '../app.component';
 import { HomeComponent } from '../components/home/home.component';
 import { SampleComponent } from '../components/sample/sample.component';
 import { PageNotFoundComponent } from '../components/page-not-found/page-not-found.component';
 import { RegisterComponent } from '../components/register/register.component';
-import { UserService } from '../services/user.service';
 import { LoggedInGuardService } from '../services/logged-in-guard.service';
-import { AccountsService } from '../services/accounts.service';
-import { ProductsService } from '../services/products.service';
 import { LoginComponent } from '../components/login/login.component';
 import { UsersComponent } from '../components/users/users.component';
 

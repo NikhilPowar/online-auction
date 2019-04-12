@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
-import { Observable } from 'rxjs/observable';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
-import UserModel, { UserType } from '../../models/user.model';
+import { AngularFireList, AngularFireObject } from 'angularfire2/database';
+import { ActivatedRoute } from '@angular/router';
+import { UserModel } from '../../models/user.model';
 import { UserService } from '../../services/user.service';
-import { AccountsService } from '../../services/accounts.service';
 import { ProductsService } from '../../services/products.service';
-import ProductModel, { AuctionModel } from '../../models/product.model';
+import { ProductModel, AuctionModel } from '../../models/product.model';
 
 
 @Component({
@@ -31,12 +27,8 @@ export class ProductsDetailComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private userService: UserService,
-    private accountsService: AccountsService,
-    private store: Store<UserModel>,
-    private router: Router,
     private route: ActivatedRoute
   ) {
-
     route.params.subscribe(params => {
       this.id = params['id'];
 
@@ -71,7 +63,6 @@ export class ProductsDetailComponent implements OnInit {
 
       if (this.auctionsDetail && this.auctionsDetail.length) {
         const lastObj = this.auctionsDetail[this.auctionsDetail.length - 1];
-
         const obj = {
           Status: 'Awarded',
           AuctionAwardedToUID: lastObj.uid,
@@ -86,7 +77,6 @@ export class ProductsDetailComponent implements OnInit {
     } else {
       this.auctionNotCompleted = true;
     }
-
   }
 
   displayableDate(dt) {
@@ -111,7 +101,7 @@ export class ProductsDetailComponent implements OnInit {
     }
 
     if (this.bidAmount <= lastBid) {
-      this.ErrorMessage = 'Bid amount should be greater then ' + lastBid;
+      this.ErrorMessage = 'Bid amount should be greater than ' + lastBid;
       return;
     }
 
@@ -139,5 +129,4 @@ export class ProductsDetailComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

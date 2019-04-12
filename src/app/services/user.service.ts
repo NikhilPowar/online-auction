@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-import UserModel from '../models/user.model';
-import { ActionType } from '../app.store';
+import { UserModel } from '../models/user.model';
 
 @Injectable()
 export class UserService {
@@ -14,7 +12,10 @@ export class UserService {
   public UserObservable: ReplaySubject<UserModel> = new ReplaySubject(1);
   public UserFirebaseObservable: AngularFireObject<UserModel>;
 
-  constructor(public af: AngularFireDatabase, public afAuth: AngularFireAuth, private store: Store<UserModel>) { }
+  constructor(
+    public af: AngularFireDatabase,
+    public afAuth: AngularFireAuth
+  ) { }
 
   firebaseIsLogin() {
     const _self = this;
@@ -68,7 +69,6 @@ export class UserService {
       userObj.uid = data.uid;
 
       _self.UserFirebaseObservable = _self.af.object('/accounts/' + data.uid);
-      // ToDo: Check for proper login observable
       _self.UserFirebaseObservable.valueChanges().subscribe(obj => {
         if (userObj.Email === 'admin@gmail.com' && !obj.uid) {
             obj = {

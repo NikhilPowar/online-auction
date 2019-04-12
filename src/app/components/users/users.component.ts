@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
-import { Store } from '@ngrx/store';
+import { AngularFireList } from 'angularfire2/database';
 import { AccountsService } from '../../services/accounts.service';
 import { UserService } from '../../services/user.service';
-import UserModel, { UserType } from '../../models/user.model';
-
+import { UserModel, UserType } from '../../models/user.model';
 
 @Component({
   selector: 'app-users',
@@ -17,7 +14,10 @@ export class UsersComponent implements OnInit {
   accounts: AngularFireList<any[]>;
   user: UserModel;
 
-  constructor(private accountService: AccountsService, private store: Store<UserModel>, private userService: UserService) {
+  constructor (
+    private accountService: AccountsService,
+    private userService: UserService
+  ) {
 
     accountService.fetchAccounts(UserType.User);
     this.accounts = accountService.accounts;

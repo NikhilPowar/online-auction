@@ -15,8 +15,8 @@
         <p mat-line>BidStartingAmount : {{item.BidStartingAmount}} </p>
 
         <span class="example-spacer"></span>
-        <button mat-button mat-raised-button color="primary" [routerLink]="['/ProductsDetail', item.$key ]" >View</button>
-        <button mat-button mat-raised-button color="danger" *ngIf="canDelete(item)" (click)="delete(item.$key)" >Delete</button>
+        <button mat-button mat-raised-button color="primary" [routerLink]="['/ProductsDetail', item.key ]" >View</button>
+        <button mat-button mat-raised-button color="danger" *ngIf="canDelete(item)" (click)="delete(item.key)" >Delete</button>
         <!--<md-divider ></md-divider>-->
       </mat-list-item>
 

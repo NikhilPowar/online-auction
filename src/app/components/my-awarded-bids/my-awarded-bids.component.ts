@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database-deprecated';
 import { AngularFireList } from 'angularfire2/database';
-import { Observable } from 'rxjs/observable';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { ProductsService } from '../../services/products.service';
-import UserModel, { UserType } from '../../models/user.model';
-import ProductModel, { Categories } from '../../models/product.model';
+import { UserModel } from '../../models/user.model';
+import { ProductModel } from '../../models/product.model';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -24,7 +21,6 @@ export class MyAwardedBidsComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private userService: UserService,
-    private store: Store<UserModel>,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -68,7 +64,9 @@ export class MyAwardedBidsComponent implements OnInit {
   }
 
   delete(key: string) {
-    this.productsService.deleteProduct(key);
+    const c = confirm('Are you sure you want to delete this product? This action cannot be undone.');
+    if (c) {
+      this.productsService.deleteProduct(key);
+    }
   }
-
 }

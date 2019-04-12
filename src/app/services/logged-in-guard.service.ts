@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, ActivatedRoute, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { UserService } from './user.service';
-import UserModel from '../models/user.model';
-import { Store } from '@ngrx/store';
+import { UserModel } from '../models/user.model';
 
 import { appRoutes } from '../routerConfig/appRoutes';
 
@@ -13,10 +12,7 @@ export class LoggedInGuardService implements CanActivate {
   urls: any = {};
 
   constructor(
-    private userService: UserService,
-    private router: Router,
-    private store: Store<UserModel>,
-    private route: ActivatedRoute
+    private userService: UserService
     ) {
 
     userService.UserObservable.subscribe(data => {
@@ -44,5 +40,4 @@ export class LoggedInGuardService implements CanActivate {
       return false;
     }
   }
-
 }

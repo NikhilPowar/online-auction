@@ -1,9 +1,13 @@
 export const Categories = [
+    'Paintings',
     'Mobiles',
-    'Labtops',
+    'Laptops',
+    'TV Sets',
+    'Instruments',
+    'Gaming Consoles',
     'Others'
 ];
-interface ProductModel {
+export interface ProductModel {
     uid: String;
     Location: String;
     FirstName: String;

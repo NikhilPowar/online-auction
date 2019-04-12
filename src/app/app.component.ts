@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 
-import { AccountsService } from './services/accounts.service';
 import { UserService } from './services/user.service';
-import UserModel, { UserType } from './models/user.model';
+import { UserModel, UserType } from './models/user.model';
 import { Categories } from './models/product.model';
-
 
 @Component({
   selector: 'app-root',
@@ -21,7 +18,6 @@ export class AppComponent {
 
   constructor(
     private userService: UserService,
-    private store: Store<UserModel>,
     private router: Router
   ) {
     userService.firebaseIsLogin();

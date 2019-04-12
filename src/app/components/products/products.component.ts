@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
-import { Observable } from 'rxjs/observable';
+import { AngularFireList} from 'angularfire2/database';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { ProductsService } from '../../services/products.service';
-import UserModel, { UserType } from '../../models/user.model';
-import ProductModel, { Categories } from '../../models/product.model';
+import { UserModel } from '../../models/user.model';
+import { ProductModel, Categories } from '../../models/product.model';
 import { UserService } from '../../services/user.service';
-
 
 @Component({
   selector: 'app-products',
@@ -25,7 +21,6 @@ export class ProductsComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private userService: UserService,
-    private store: Store<UserModel>,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -78,6 +73,9 @@ export class ProductsComponent implements OnInit {
   }
 
   delete(uuid: string) {
-    this.productsService.deleteProduct(uuid);
+    const c = confirm('Are you sure you want to delete this product? This cannot be undone');
+    if (c) {
+      this.productsService.deleteProduct(uuid);
+    }
   }
 }

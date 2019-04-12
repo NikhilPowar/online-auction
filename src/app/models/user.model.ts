@@ -9,7 +9,7 @@ for (const key of Object.keys(UserType)) {
 }
 export const UserTypeArr = tmpArr;
 
-interface UserModel {
+export interface UserModel {
     uid: String;
     FirstName: String;
     LastName: String;

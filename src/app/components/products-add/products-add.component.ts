@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { ProductsService } from '../../services/products.service';
-import UserModel from '../../models/user.model';
-import ProductModel, { Categories } from '../../models/product.model';
+import { UserModel } from '../../models/user.model';
+import { ProductModel, Categories } from '../../models/product.model';
 import * as firebase from 'firebase';
 
 @Component({
@@ -28,7 +27,6 @@ export class ProductsAddComponent implements OnInit {
     private userService: UserService,
     private productsService: ProductsService,
     private router: Router,
-    private store: Store<UserModel>
   ) {
     this.myForm = fb.group({
       'Title': ['', Validators.required],
