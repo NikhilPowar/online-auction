@@ -14,7 +14,7 @@ import { ProductsDetailComponent } from '../components/products-detail/products-
 import { MyAwardedBidsComponent } from '../components/my-awarded-bids/my-awarded-bids.component';
 
 export const appRoutes: Routes = [
-  { path: '', redirectTo: '/Home', pathMatch: 'full', canActivate: [LoggedInGuardService]},
+  { path: '', redirectTo: 'Home', pathMatch: 'full', canActivate: [LoggedInGuardService]},
   { path: 'Home', component: HomeComponent, canActivate: [LoggedInGuardService]},
   { path: 'Login', component: LoginComponent},
   { path: 'Register', component: RegisterComponent},

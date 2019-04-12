@@ -17,6 +17,7 @@ export class ProductsComponent implements OnInit {
   products: AngularFireList<ProductModel>;
   id: String;
   productsArr: ProductModel[];
+  category: string;
 
   constructor(
     private productsService: ProductsService,
@@ -24,8 +25,8 @@ export class ProductsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
-
     route.params.subscribe(params => {
+      this.category = null;
       this.id = params['id'];
 
       userService.UserObservable.subscribe(data => {
@@ -37,6 +38,7 @@ export class ProductsComponent implements OnInit {
         }
 
         if (this.id && Categories.indexOf(<any>this.id) !== -1) {
+          this.category = this.id.valueOf();
           console.log('Fetching products by category...');
           productsService.fetchProducts({
             orderByChild: 'Category',

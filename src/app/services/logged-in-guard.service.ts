@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { UserService } from './user.service';
 import { UserModel } from '../models/user.model';
 
@@ -12,9 +12,9 @@ export class LoggedInGuardService implements CanActivate {
   urls: any = {};
 
   constructor(
-    private userService: UserService
-    ) {
-
+    private userService: UserService,
+    private router: Router
+  ) {
     userService.UserObservable.subscribe(data => {
       this.user = data;
     });
@@ -32,11 +32,13 @@ export class LoggedInGuardService implements CanActivate {
       if (this.urls[url] && this.urls[url].length && this.urls[url].indexOf(this.user.AccountType) !== -1 ) {
         return true;
       } else if (this.urls[url] && this.urls[url].length) {
+        this.router.navigate(['Login']);
         return false;
       } else {
         return true;
       }
     } else {
+      this.router.navigate(['Login']);
       return false;
     }
   }
