@@ -70,7 +70,7 @@ export class UserService {
 
       _self.UserFirebaseObservable = _self.af.object('/accounts/' + data.uid);
       _self.UserFirebaseObservable.valueChanges().subscribe(obj => {
-        if (userObj.Email === 'admin@gmail.com' && !obj.uid) {
+        if (userObj.Email === 'admin@gmail.com' && !obj) {
             obj = {
               uid : userObj.uid,
               Email : userObj.Email,

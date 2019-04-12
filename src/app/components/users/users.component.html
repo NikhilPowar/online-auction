@@ -7,14 +7,13 @@
 
     <mat-list>
       <!--<h3 md-subheader>Folders</h3>-->
-      <mat-list-item *ngFor="let item of accounts | async; let num = index">
+      <mat-list-item *ngFor="let item of accountsArr; let num = index">
         <!--<md-icon md-list-avatar>folder</md-icon>-->
         <h4 mat-line>{{item.FirstName}} {{item.LastName}}</h4>
         <!--<p md-line> {{item.Gender}} </p>-->
 
         <span class="example-spacer"></span>
-        <button mat-button mat-raised-button color="primary" [routerLink]="['/Resume', item.uid]" >View</button>
-        <button mat-button mat-raised-button color="danger" *ngIf="user?.AccountType == 'Admin'" (click)="delete(item.$key)" >Delete</button>
+        <button mat-button mat-raised-button color="warn" *ngIf="user?.AccountType === 'Admin'" (click)="delete(item.key)" >Delete</button>
         <mat-divider ng-if="num < accounts.length - 1"></mat-divider>
       </mat-list-item>
 

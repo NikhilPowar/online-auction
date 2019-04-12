@@ -18,6 +18,7 @@ export const appRoutes: Routes = [
   { path: 'Home', component: HomeComponent, canActivate: [LoggedInGuardService]},
   { path: 'Login', component: LoginComponent},
   { path: 'Register', component: RegisterComponent},
+  { path: 'Users', component: UsersComponent, data: {access : ['Admin']}, canActivate: [LoggedInGuardService]},
   { path: 'ProductsAdd', component: ProductsAddComponent, data: {access : ['Admin', 'User']}, canActivate: [LoggedInGuardService]},
   { path: 'Products', component: ProductsComponent, data: {access : ['Admin', 'User']}, canActivate: [LoggedInGuardService]},
   { path: 'Products/:id', component: ProductsComponent, data: {access : ['Admin', 'User']}, canActivate: [LoggedInGuardService]},

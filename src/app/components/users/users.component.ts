@@ -12,6 +12,7 @@ import { UserModel, UserType } from '../../models/user.model';
 export class UsersComponent implements OnInit {
 
   accounts: AngularFireList<any[]>;
+  accountsArr: any[];
   user: UserModel;
 
   constructor (
@@ -20,7 +21,9 @@ export class UsersComponent implements OnInit {
   ) {
 
     accountService.fetchAccounts(UserType.User);
-    this.accounts = accountService.accounts;
+    accountService.accountsArr.subscribe(result => {
+      this.accountsArr = result;
+    });
 
     userService.UserObservable.subscribe(data => {
       this.user = data;
@@ -32,6 +35,9 @@ export class UsersComponent implements OnInit {
   }
 
   delete(key: string) {
-    this.accountService.deleteAccount(key);
+    const c = confirm('Are you sure you want to delete this user? This action is irreversible.');
+    if (c) {
+      this.accountService.deleteAccount(key);
+    }
   }
 }

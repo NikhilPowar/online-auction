@@ -41,6 +41,16 @@ export class ProductsDetailComponent implements OnInit {
         }
       });
 
+      this.highestBid = {
+        uid: null,
+        pid: null,
+        FirstName: null,
+        LastName: null,
+        Bid: 0,
+        TimeStamp: null,
+        DateTime: null
+      };
+
       this.product.valueChanges().subscribe((data: ProductModel) => {
         this.productDetail = data;
         console.log(this.productDetail);
@@ -86,7 +96,6 @@ export class ProductsDetailComponent implements OnInit {
   }
 
   getHighestBid() {
-    const highestBidAmount = this.productDetail.BidStartingAmount;
     if (this.auctionsDetail && this.auctionsDetail.length) {
       this.highestBid = this.auctionsDetail[this.auctionsDetail.length - 1];
     }
