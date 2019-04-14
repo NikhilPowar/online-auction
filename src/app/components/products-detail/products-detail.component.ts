@@ -19,6 +19,7 @@ export class ProductsDetailComponent implements OnInit {
   auctions: AngularFireList<AuctionModel>;
   auctionsDetail: AuctionModel[];
   highestBid: AuctionModel;
+  userBid: AuctionModel;
   id: String;
   auctionNotCompleted = false;
   bidAmount: number = null;
@@ -51,6 +52,16 @@ export class ProductsDetailComponent implements OnInit {
         DateTime: null
       };
 
+      this.userBid = {
+        uid: null,
+        pid: null,
+        FirstName: null,
+        LastName: null,
+        Bid: 0,
+        TimeStamp: null,
+        DateTime: null
+      };
+
       this.product.valueChanges().subscribe((data: ProductModel) => {
         this.productDetail = data;
         console.log(this.productDetail);
@@ -58,6 +69,7 @@ export class ProductsDetailComponent implements OnInit {
           this.auctionsDetail = obj;
           this.checkFn();
           this.getHighestBid();
+          this.getUserBid();
         });
       });
     });
@@ -101,6 +113,16 @@ export class ProductsDetailComponent implements OnInit {
     }
   }
 
+  getUserBid() {
+    if (this.auctionsDetail && this.auctionsDetail.length) {
+      for (const bid of this.auctionsDetail) {
+        if (bid.uid === this.user.uid) {
+          this.userBid = bid;
+        }
+      }
+    }
+  }
+
   raiseBid(amount: number) {
     amount = this.highestBid.Bid.valueOf() + amount;
 
@@ -140,6 +162,11 @@ export class ProductsDetailComponent implements OnInit {
   }
 
   submitBid() {
+    if (this.highestBid.uid === this.user.uid) {
+      this.ErrorMessage = 'Highest bid is already yours';
+      return;
+    }
+
     if (!this.bidAmount) {
       this.ErrorMessage = 'Please enter bid amount';
       return;

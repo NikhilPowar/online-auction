@@ -40,10 +40,14 @@
 
 <mat-card class="example-card" *ngIf="highestBid">
     <mat-card-content>
-      <h2>Highest Bid<span class="bidAmount">Bid : {{highestBid.Bid}}</span></h2>
+      <h2>Bids<span class="bidAmount">Highest Bid : {{highestBid.Bid}}</span></h2>
       <p>
-        Bid Placed : {{highestBid.DateTime && displayableDate(highestBid.DateTime) || "--"}}
+        Highest Bid Placed : {{highestBid.DateTime && displayableDate(highestBid.DateTime) || "--"}}
       </p>
+      <p>
+        Your Bid: {{userBid.Bid}}
+      </p>
+      <p *ngIf="userBid===highestBid">You are currently the highest bidder!</p>
     </mat-card-content>
   </mat-card>
 
