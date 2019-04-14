@@ -59,17 +59,17 @@ export class UserService {
   }
 
 
-  firebaseLogin(userObj) {
+  firebaseLogin(userObj): Promise<any> {
     const _self = this;
 
-    firebase.auth().signInWithEmailAndPassword(
+    return firebase.auth().signInWithEmailAndPassword(
       userObj.Email,
       userObj.Password
     ).then(function(data) {
       userObj.uid = data.uid;
 
       _self.UserFirebaseObservable = _self.af.object('/accounts/' + data.uid);
-      _self.UserFirebaseObservable.valueChanges().subscribe(obj => {
+      return _self.UserFirebaseObservable.valueChanges().subscribe(obj => {
         if (userObj.Email === 'admin@gmail.com' && !obj) {
             obj = {
               uid : userObj.uid,
@@ -86,6 +86,7 @@ export class UserService {
       });
     }).catch(function(err) {
       console.log('err', err);
+      return err;
     });
   }
 }

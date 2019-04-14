@@ -10,15 +10,17 @@
           <mat-card-title><h2>Login</h2></mat-card-title>
         </mat-card-header>
         <mat-card-content>
-
+          <p *ngIf="hasLoginError" [ngStyle]="{'color': 'red'}">{{ loginError }}</p>
           <mat-input-container class="example-full-width" >
             <input matInput placeholder="Email" type="email" [formControl]="myForm.controls['Email']">
             <mat-hint *ngIf="myForm.controls['Email'].touched && myForm.controls['Email'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</mat-hint>
+            <mat-hint *ngIf="myForm.controls['Email'].touched && myForm.controls['Email'].hasError('pattern')" [ngStyle]="{'color': 'red'}" align="start">Incorrect email format</mat-hint>
           </mat-input-container>
 
           <mat-input-container class="example-full-width">
             <input matInput placeholder="Password" type="password" [formControl]="myForm.controls['Password']">
             <mat-hint *ngIf="myForm.controls['Password'].touched && myForm.controls['Password'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</mat-hint>
+            <mat-hint *ngIf="myForm.controls['Password'].touched && myForm.controls['Password'].hasError('pattern')" [ngStyle]="{'color': 'red'}" align="start">Only letters, numbers, _, *, $, #, @, % allowed</mat-hint>
           </mat-input-container>
 
         </mat-card-content>

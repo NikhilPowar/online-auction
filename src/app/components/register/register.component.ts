@@ -13,18 +13,32 @@ export class RegisterComponent implements OnInit {
   myForm: FormGroup;
   userTypeArr = UserTypeArr;
   userType = UserType;
+  firstNamePattern: string;
+  lastNamePattern: string;
+  emailPattern: string;
+  passwordPattern: string;
+  locationPattern: string;
+  registerError: string;
+  hasRegisterError: boolean;
+
   constructor(
     fb: FormBuilder,
     private userService: UserService,
     private router: Router
   ) {
+    this.hasRegisterError = false;
+    this.firstNamePattern = '^[A-Z][a-zA-Z ]*$';
+    this.lastNamePattern = '^[A-Z][a-zA-Z ]*$';
+    this.emailPattern = '^[a-z0-9_]*@[a-z]*([.][a-z]{2,3})+$';
+    this.passwordPattern = '^[a-zA-Z0-9_#@%$*]+$';
+    this.locationPattern = '^[A-Z][a-zA-Z ]*$';
 
     this.myForm = fb.group({
-      'FirstName': ['', Validators.required],
-      'LastName': ['', Validators.required],
-      'Email': ['', Validators.compose([Validators.required])],
-      'Password': ['', Validators.required],
-      'Location': ['', Validators.required],
+      'FirstName': ['', [Validators.required, Validators.pattern(this.firstNamePattern)]],
+      'LastName': ['', [Validators.required, Validators.pattern(this.lastNamePattern)]],
+      'Email': ['', [Validators.required, Validators.pattern(this.emailPattern)]],
+      'Password': ['', [Validators.required, Validators.pattern(this.passwordPattern)]],
+      'Location': ['', [Validators.required, Validators.pattern(this.locationPattern)]],
       'AccountType': ['User', Validators.required],
     });
 
@@ -36,9 +50,16 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  setRegisterError(error: string): void {
+    this.registerError = error;
+    this.hasRegisterError = true;
+  }
+
   onSubmit(value: any): void {
+    this.hasRegisterError = false;
     if (!this.myForm.valid) {
       console.log('Form Not Valid');
+      this.setRegisterError('Please fill form correctly');
       return;
     }
     console.log('you submitted value: ', value);

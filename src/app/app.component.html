@@ -1,9 +1,31 @@
-<mat-sidenav-container [class.m2app-dark]="isDarkTheme">
+<!-- Header -->
+<mat-toolbar color="primary" fixed>
+  
+    REALTIME ONLINE AUCTION
+
+    <span class="example-fill-remaining-space"></span>
+    <span *ngIf="(user && user.uid)">Welcome {{(user && user.FirstName || "")}}</span>
+    <button mat-button [routerLink]="['/Login']" *ngIf="!(user && user.uid)" >Login</button>
+    <button mat-button [routerLink]="['/Register']" *ngIf="!(user && user.uid)" >Register</button>
+    <!--<button mat-button *ngIf="(user && user.uid)" (click)="logout()" >Logout</button>-->
+    <button class="app-icon-button" mat-icon-button [matMenuTriggerFor]="menu" *ngIf="(user && user.uid)">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+  <!-- Header -->
+
+<mat-sidenav-container [class.m2app-dark]="isDarkTheme" *ngIf="(user && user.uid)">
 
   <!-- Side Nav Bar -->
-  <mat-sidenav #sidenav mode="push" class="app-sidenav component-viewer-sidenav" >
+  <mat-sidenav mode="side" class="app-sidenav component-viewer-sidenav" opened >
 
-    <nav *ngIf="(user && user.uid)">
+    <nav>
       <h3>Menu</h3>
       <ul>
 
@@ -45,36 +67,12 @@
 
   </mat-sidenav>
   <!-- Side Nav Bar -->
-
-  <!-- Header -->
-  <mat-toolbar color="primary">
-
-    <button mat-icon-button class="app-icon-button" *ngIf="(user && user.uid)" (click)="sidenav.toggle()">
-      <i class="material-icons app-toolbar-menu">menu</i>
-    </button>
-
-    REALTIME ONLINE AUCTION
-
-    <span class="example-fill-remaining-space"></span>
-    <span *ngIf="(user && user.uid)">Welcome {{(user && user.FirstName || "")}}</span>
-    <button mat-button [routerLink]="['/Login']" *ngIf="!(user && user.uid)" >Login</button>
-    <button mat-button [routerLink]="['/Register']" *ngIf="!(user && user.uid)" >Register</button>
-    <!--<button mat-button *ngIf="(user && user.uid)" (click)="logout()" >Logout</button>-->
-    <button class="app-icon-button" mat-icon-button [matMenuTriggerFor]="menu" *ngIf="(user && user.uid)">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="logout()">
-        <mat-icon>logout</mat-icon>
-        <span>Logout</span>
-      </button>
-    </mat-menu>
-  </mat-toolbar>
-  <!-- Header -->
-
-  <div class="app-content">
-    <router-outlet></router-outlet>
-    <!-- Routed views go here -->
-  </div>
+  
+  <mat-sidenav-content>
+    <div class="app-content">
+      <router-outlet></router-outlet>
+      <!-- Routed views go here -->
+    </div>
+  </mat-sidenav-content>
 
 </mat-sidenav-container>

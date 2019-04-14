@@ -10,7 +10,7 @@
 }
 
 .component-viewer-sidenav h3 {
-  background: rgba(0,0,0,.32);
+  background: grey;
   color: #fff;
 }
 
@@ -46,7 +46,7 @@
 }
 
 .component-viewer-sidenav li>a {
-  color: rgba(0,0,0,.54);
+  color: rgba(0,0,0,1);
 }
 
 .component-viewer-sidenav li>a.component-viewer-sidenav-item-selected {
@@ -64,9 +64,6 @@
   flex: 1 1 auto;
 }
 
-.mat-drawer-container {
-  position: static !important;
-}
 .app-content {
   padding: 20px;
   height: calc(100vh - 104px);

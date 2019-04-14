@@ -10,30 +10,36 @@
           <mat-card-title><h2>Register</h2></mat-card-title>
         </mat-card-header>
         <mat-card-content>
+          <p *ngIf="hasRegisterError" [ngStyle]="{'color': 'red'}">{{ registerError }}</p>
 
           <mat-input-container class="example-full-width">
             <input matInput placeholder="First Name" [formControl]="myForm.controls['FirstName']">
             <mat-hint *ngIf="myForm.controls['FirstName'].touched && myForm.controls['FirstName'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</mat-hint>
+            <mat-hint *ngIf="myForm.controls['FirstName'].touched && myForm.controls['FirstName'].hasError('pattern')" [ngStyle]="{'color': 'red'}" align="start">Only letters and spaces allowed; Must start with capital letter</mat-hint>
           </mat-input-container>
 
           <mat-input-container class="example-full-width">
             <input matInput placeholder="Last Name" [formControl]="myForm.controls['LastName']">
             <mat-hint *ngIf="myForm.controls['LastName'].touched && myForm.controls['LastName'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</mat-hint>
+            <mat-hint *ngIf="myForm.controls['LastName'].touched && myForm.controls['LastName'].hasError('pattern')" [ngStyle]="{'color': 'red'}" align="start">Only letters and spaces allowed; Must start with capital letter</mat-hint>
           </mat-input-container>
 
           <mat-input-container class="example-full-width" >
             <input matInput placeholder="Email" type="email" [formControl]="myForm.controls['Email']">
             <mat-hint *ngIf="myForm.controls['Email'].touched && myForm.controls['Email'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</mat-hint>
+            <mat-hint *ngIf="myForm.controls['Email'].touched && myForm.controls['Email'].hasError('pattern')" [ngStyle]="{'color': 'red'}" align="start">Incorrect email format</mat-hint>
           </mat-input-container>
 
           <mat-input-container class="example-full-width">
             <input matInput placeholder="Password" type="password" [formControl]="myForm.controls['Password']">
             <mat-hint *ngIf="myForm.controls['Password'].touched && myForm.controls['Password'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</mat-hint>
+            <mat-hint *ngIf="myForm.controls['Password'].touched && myForm.controls['Password'].hasError('pattern')" [ngStyle]="{'color': 'red'}" align="start">Only letters, numbers, _, *, $, #, @, % allowed</mat-hint>
           </mat-input-container>
 
           <mat-input-container class="example-full-width">
             <input matInput placeholder="Location" [formControl]="myForm.controls['Location']">
             <mat-hint *ngIf="myForm.controls['Location'].touched && myForm.controls['Location'].hasError('required')" [ngStyle]="{'color': 'red'}" align="start">Required</mat-hint>
+            <mat-hint *ngIf="myForm.controls['Location'].touched && myForm.controls['Location'].hasError('pattern')" [ngStyle]="{'color': 'red'}" align="start">Only letters and spaces allowed; Must start with capital letter</mat-hint>
           </mat-input-container>
 
           <br>
