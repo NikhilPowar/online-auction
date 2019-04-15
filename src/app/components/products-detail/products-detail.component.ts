@@ -24,6 +24,7 @@ export class ProductsDetailComponent implements OnInit {
   auctionNotCompleted = false;
   bidAmount: number = null;
   ErrorMessage = '';
+  contactUser: UserModel;
 
   constructor(
     private productsService: ProductsService,
@@ -70,6 +71,7 @@ export class ProductsDetailComponent implements OnInit {
           this.checkFn();
           this.getHighestBid();
           this.getUserBid();
+          this.getUserDetails();
         });
       });
     });
@@ -78,6 +80,7 @@ export class ProductsDetailComponent implements OnInit {
   checkFn() {
     const currentDate = new Date();
     if (this.productDetail.Status === 'Awarded' || this.productDetail.Status === 'Cancelled') {
+      this.auctionNotCompleted = false;
       return;
     }
 
@@ -202,6 +205,26 @@ export class ProductsDetailComponent implements OnInit {
     this.productsService.addAuction(obj);
     this.bidAmount = null;
     this.ErrorMessage = '';
+  }
+
+  getUserDetails() {
+    if (this.productDetail.Status !== 'Awarded') {
+      return;
+    }
+    if (this.productDetail.uid === this.user.uid) {
+      this.userService.getUser(this.productDetail.AuctionAwardedToUID);
+      this.userService.user.subscribe(result => {
+        this.contactUser = result;
+      });
+      return;
+    }
+    if (this.productDetail.AuctionAwardedToUID === this.user.uid) {
+      this.userService.getUser(this.productDetail.uid);
+      this.userService.user.subscribe(result => {
+        this.contactUser = result;
+      });
+      return;
+    }
   }
 
   ngOnInit() {

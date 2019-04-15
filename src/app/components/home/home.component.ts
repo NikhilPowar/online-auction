@@ -84,6 +84,7 @@ export class HomeComponent implements OnInit {
 
   checkFn(product) {
     const currentDate = new Date();
+    this.productsService.fetchProductObj(product.key);
     if (product.Status === 'Awarded' || product.Status === 'Cancelled') {
       return;
     }

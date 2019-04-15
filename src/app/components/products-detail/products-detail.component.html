@@ -25,10 +25,28 @@
   <mat-card-content>
     <h2>
       Awarded To {{productDetail?.AuctionAwardedToFirstName}} {{productDetail?.AuctionAwardedToLastName}}
-      <span class="bidAmount">{{productDetail?.AuctionAwardedToAmount}}</span>
+      <span class="bidAmount">Final Bid: {{productDetail?.AuctionAwardedToAmount}}</span>
     </h2>
   </mat-card-content>
 </mat-card>
+
+<mat-card class="example-card" *ngIf="productDetail?.Status === 'Awarded' && user.uid === productDetail?.AuctionAwardedToUID && contactUser" >
+  <mat-card-content>
+    <h2>
+      Congratulations! You have won the auction!
+      Contact the owner: {{contactUser.Email}}
+    </h2>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="example-card" *ngIf="productDetail?.Status === 'Awarded' && user.uid === productDetail?.uid && contactUser" >
+    <mat-card-content>
+      <h2>
+        Congratulations! Your product has been sucessfully auctioned!
+        Contact the winner: {{contactUser.Email}}
+      </h2>
+    </mat-card-content>
+  </mat-card>
 
 <mat-card class="example-card" *ngIf="productDetail?.Status === 'Cancelled'" >
   <mat-card-content>

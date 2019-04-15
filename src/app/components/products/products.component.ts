@@ -3,7 +3,7 @@ import { AngularFireList} from 'angularfire2/database';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 import { UserModel } from '../../models/user.model';
-import { ProductModel, Categories } from '../../models/product.model';
+import { ProductModel, Categories, AuctionModel } from '../../models/product.model';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -17,6 +17,7 @@ export class ProductsComponent implements OnInit {
   products: AngularFireList<ProductModel>;
   id: String;
   productsArr: ProductModel[];
+  auctionsArr: AuctionModel[];
   category: string;
 
   constructor(
@@ -54,8 +55,17 @@ export class ProductsComponent implements OnInit {
           productsService.fetchProducts({});
         }
 
+        productsService.fetchAuctions({});
+
         productsService.productsArr.subscribe(result => {
           this.productsArr = result;
+        });
+
+        productsService.auctionsArr.subscribe(result => {
+          this.auctionsArr = result;
+          this.productsArr.forEach(ele => {
+            this.checkFn(ele);
+          });
         });
       });
     });
@@ -80,6 +90,31 @@ export class ProductsComponent implements OnInit {
     const c = confirm('Are you sure you want to delete this product? This action cannot be undone!');
     if (c) {
       this.productsService.deleteProduct(uuid);
+    }
+  }
+
+  checkFn(product) {
+    const currentDate = new Date();
+    this.productsService.fetchProductObj(product.key);
+    if (product.Status === 'Awarded' || product.Status === 'Cancelled') {
+      return;
+    }
+    const bidEndDate = new Date(<any>product.AutionEndTimeStamp);
+    if (bidEndDate <= currentDate) {
+      const auctions = this.auctionsArr.filter(auction => auction.pid === product.key);
+      if (auctions && auctions.length) {
+        const lastObj = auctions[auctions.length - 1];
+        const obj = {
+          Status: 'Awarded',
+          AuctionAwardedToUID: lastObj.uid,
+          AuctionAwardedToFirstName: lastObj.FirstName,
+          AuctionAwardedToLastName: lastObj.LastName,
+          AuctionAwardedToAmount: lastObj.Bid,
+        };
+        this.productsService.updateProduct(obj);
+      } else {
+        this.productsService.updateProduct({ Status: 'Cancelled' });
+      }
     }
   }
 }

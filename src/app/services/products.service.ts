@@ -71,6 +71,8 @@ export class ProductsService {
   fetchAuctions(obj) {
     if (Object.keys(obj).length) {
       this.auctions = this.af.list('/auctions', ref => ref.orderByChild(obj.orderByChild).equalTo(obj.equalTo));
+    } else {
+      this.auctions = this.af.list('/auctions', ref => ref.orderByChild('pid'));
     }
     this.auctionsArr = this.auctions.snapshotChanges().map(changes => {
       return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
@@ -82,5 +84,3 @@ export class ProductsService {
     this.auctions.push(obj);
   }
 }
-
-// ToDo: Enhance homepage and handle completed auction products.

@@ -5,12 +5,14 @@ import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
 import { UserModel } from '../models/user.model';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UserService {
 
   public UserObservable: ReplaySubject<UserModel> = new ReplaySubject(1);
   public UserFirebaseObservable: AngularFireObject<UserModel>;
+  public user: Observable<any>;
 
   constructor(
     public af: AngularFireDatabase,
@@ -88,5 +90,9 @@ export class UserService {
       console.log('err', err);
       return err;
     });
+  }
+
+  getUser(uid) {
+    this.user = this.af.object('/accounts/' + uid).valueChanges();
   }
 }
