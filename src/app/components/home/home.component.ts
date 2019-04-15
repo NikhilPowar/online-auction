@@ -57,6 +57,9 @@ export class HomeComponent implements OnInit {
   }
 
   getInvolvedAuctions() {
+    this.productsArr.forEach(product => {
+      this.checkFn(product);
+    });
     this.ongoing = [];
     this.ended = [];
     this.auctionsArr.forEach((auction) => {
@@ -77,5 +80,29 @@ export class HomeComponent implements OnInit {
       });
     });
     console.log(this.ongoing);
+  }
+
+  checkFn(product) {
+    const currentDate = new Date();
+    if (product.Status === 'Awarded' || product.Status === 'Cancelled') {
+      return;
+    }
+    const bidEndDate = new Date(<any>product.AutionEndTimeStamp);
+    if (bidEndDate <= currentDate) {
+      const auctions = this.auctionsArr.filter(auction => auction.pid === product.key);
+      if (auctions && auctions.length) {
+        const lastObj = auctions[auctions.length - 1];
+        const obj = {
+          Status: 'Awarded',
+          AuctionAwardedToUID: lastObj.uid,
+          AuctionAwardedToFirstName: lastObj.FirstName,
+          AuctionAwardedToLastName: lastObj.LastName,
+          AuctionAwardedToAmount: lastObj.Bid,
+        };
+        this.productsService.updateProduct(obj);
+      } else {
+        this.productsService.updateProduct({ Status: 'Cancelled' });
+      }
+    }
   }
 }

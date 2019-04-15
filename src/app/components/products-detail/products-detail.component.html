@@ -47,7 +47,7 @@
       <p>
         Your Bid: {{userBid.Bid}}
       </p>
-      <p *ngIf="userBid===highestBid">You are currently the highest bidder!</p>
+      <p *ngIf="userBid===highestBid">You are currently the highest bidder! Bidding is disabled</p>
     </mat-card-content>
   </mat-card>
 
@@ -64,30 +64,32 @@
 </div>
 
 <div *ngIf="productDetail?.uid !== user?.uid">
-  <mat-card class="example-card" *ngIf="auctionNotCompleted" >
-    <mat-card-content>
-      <h2>Quick Bids</h2>
-        <button mat-button mat-raised-button color="primary" type="button" (click)="raiseBid(10)">Raise 10</button>
-        <button mat-button mat-raised-button color="primary" type="button" (click)="raiseBid(50)">Raise 50</button>
-        <button mat-button mat-raised-button color="primary" type="button" (click)="raiseBid(100)">Raise 100</button>
-        <button mat-button mat-raised-button color="primary" type="button" (click)="raiseBid(500)">Raise 500</button>
-        <button mat-button mat-raised-button color="primary" type="button" (click)="raiseBid(1000)">Raise 1000</button>
-        <button mat-button mat-raised-button color="primary" type="button" (click)="raiseBid(5000)">Raise 5000</button>
-        <button mat-button mat-raised-button color="primary" type="button" (click)="raiseBid(10000)">Raise 10000</button>
-    </mat-card-content>
-  </mat-card>
+  <div *ngIf="userBid !== highestBid">
+    <mat-card class="example-card" *ngIf="auctionNotCompleted" >
+      <mat-card-content>
+        <h2>Quick Bids</h2>
+          <button mat-button mat-raised-button color="primary" type="button" (click)="raiseBid(10)">Raise 10</button>
+          <button mat-button mat-raised-button color="primary" type="button" (click)="raiseBid(50)">Raise 50</button>
+          <button mat-button mat-raised-button color="primary" type="button" (click)="raiseBid(100)">Raise 100</button>
+          <button mat-button mat-raised-button color="primary" type="button" (click)="raiseBid(500)">Raise 500</button>
+          <button mat-button mat-raised-button color="primary" type="button" (click)="raiseBid(1000)">Raise 1000</button>
+          <button mat-button mat-raised-button color="primary" type="button" (click)="raiseBid(5000)">Raise 5000</button>
+          <button mat-button mat-raised-button color="primary" type="button" (click)="raiseBid(10000)">Raise 10000</button>
+      </mat-card-content>
+    </mat-card>
 
-  <mat-card class="example-card" *ngIf="auctionNotCompleted" >
-    <p *ngIf="ErrorMessage" class="error-message">{{ErrorMessage}}</p>
-    <mat-card-content>
-      <h2>Custom Bid</h2>
-      <mat-input-container class="chatTextCont" *ngIf="!isFileUploading">
-        <input matInput placeholder="Enter Bid Amount" type="number" [(ngModel)]="bidAmount" >
-      </mat-input-container>
-      <span class="example-spacer"></span>
-      <div class="chatButtonsCont">
-        <button mat-button mat-raised-button color="primary" type="button" (click)="submitBid()">Submit Bid</button>
-      </div>
-    </mat-card-content>
-  </mat-card>
+    <mat-card class="example-card" *ngIf="auctionNotCompleted" >
+      <p *ngIf="ErrorMessage" class="error-message">{{ErrorMessage}}</p>
+      <mat-card-content>
+        <h2>Custom Bid</h2>
+        <mat-input-container class="chatTextCont" *ngIf="!isFileUploading">
+          <input matInput placeholder="Enter Bid Amount" type="number" [(ngModel)]="bidAmount" >
+        </mat-input-container>
+        <span class="example-spacer"></span>
+        <div class="chatButtonsCont">
+          <button mat-button mat-raised-button color="primary" type="button" (click)="submitBid()">Submit Bid</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
