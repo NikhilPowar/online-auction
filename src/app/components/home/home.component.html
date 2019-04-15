@@ -1,45 +1,46 @@
 <!--User's ongoing bids-->
 <mat-card class="example-card">
-    <mat-card-header>
-      <mat-card-title><h2>Ongoing participated auctions</h2></mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-list>
-        <!--<h3 md-subheader>Folders</h3>-->
-        <mat-list-item *ngFor="let item of ongoing; let num = index" >
-          <!--<md-icon md-list-avatar>folder</md-icon>-->
-          <h4 mat-line>Title : {{item.Title}}</h4>
-          <p mat-line>Category : {{item.Category}} </p>
-          <p mat-line>Aution End Date : {{item.AutionEndDate}} {{item.AutionEndTime}} </p>
-          <p mat-line>Location : {{item.Location}} </p>
-          <p mat-line>BidStartingAmount : {{item.BidStartingAmount}} </p>
-  
-          <span class="example-spacer"></span>
-          <button mat-button mat-raised-button color="primary" [routerLink]="['/ProductsDetail', item.key ]" >View</button>
-          <button mat-button mat-raised-button color="danger" *ngIf="canDelete(item)" (click)="delete(item.key)" >Delete</button>
-          <!--<md-divider ></md-divider>-->
-        </mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+  <mat-card-header>
+    <mat-card-title><h2>Ongoing participated auctions</h2></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <!--<h3 md-subheader>Folders</h3>-->
+      <mat-list-item *ngFor="let item of ongoing; let num = index" >
+        <!--<md-icon md-list-avatar>folder</md-icon>-->
+        <h4 mat-line>Title : {{item.Title}}</h4>
+        <p mat-line>Category : {{item.Category}} </p>
+        <p mat-line>Aution End Date : {{item.AutionEndDate}} {{item.AutionEndTime}} </p>
+        <p mat-line>Location : {{item.Location}} </p>
+        <p mat-line>Bid Starting Amount : {{item.BidStartingAmount}} </p>
+        <p mat-line>Status : {{item.Status}} </p>
+
+        <span class="example-spacer"></span>
+        <button mat-button mat-raised-button color="primary" [routerLink]="['/ProductsDetail', item.key ]" >View</button>
+        <!--<md-divider ></md-divider>-->
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
   <!--User's ongoing bids-->
 
 
 <!--User's past bids-->
 <mat-card class="example-card">
   <mat-card-header>
-    <mat-card-title><h2>Recent bids</h2></mat-card-title>
+    <mat-card-title><h2>Completed auctions that you participated in</h2></mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <mat-list>
       <!--<h3 md-subheader>Folders</h3>-->
-      <mat-list-item *ngFor="let item of recentBids; let num = index" >
+      <mat-list-item *ngFor="let item of ended; let num = index" >
         <!--<md-icon md-list-avatar>folder</md-icon>-->
         <h4 mat-line>Title : {{item.Title}}</h4>
         <p mat-line>Category : {{item.Category}} </p>
         <p mat-line>Aution End Date : {{item.AutionEndDate}} {{item.AutionEndTime}} </p>
         <p mat-line>Location : {{item.Location}} </p>
-        <p mat-line>BidStartingAmount : {{item.BidStartingAmount}} </p>
+        <p mat-line>Bid Starting Amount : {{item.BidStartingAmount}} </p>
+        <p mat-line>Status : {{item.Status}} </p>
 
         <span class="example-spacer"></span>
         <button mat-button mat-raised-button color="primary" [routerLink]="['/ProductsDetail', item.key ]" >View</button>

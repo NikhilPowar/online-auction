@@ -20,14 +20,20 @@
   </mat-toolbar>
   <!-- Header -->
 
-<mat-sidenav-container [class.m2app-dark]="isDarkTheme" *ngIf="(user && user.uid)">
+<mat-sidenav-container [class.m2app-dark]="isDarkTheme">
 
   <!-- Side Nav Bar -->
-  <mat-sidenav mode="side" class="app-sidenav component-viewer-sidenav" opened >
+  <mat-sidenav mode="side" class="app-sidenav component-viewer-sidenav" opened  *ngIf="(user && user.uid)">
 
     <nav>
       <h3>Menu</h3>
       <ul>
+
+        <li *ngIf="canShow(user, [userType.Admin, userType.User])">
+          <a routerlinkactive="component-viewer-sidenav-item-selected" [routerLink]="['/Home']" class="">
+            Home
+          </a>
+        </li>
 
         <li *ngIf="canShow(user, [userType.Admin, userType.User])">
           <a routerlinkactive="component-viewer-sidenav-item-selected" [routerLink]="['/ProductsAdd']" class="">

@@ -18,7 +18,7 @@ export class ProductsService {
   auctions: AngularFireList<AuctionModel>;
 
   productsArr: Observable<any[]>;
-  auctionsArr: any[];
+  auctionsArr: Observable<any[]>;
 
   constructor(public af: AngularFireDatabase) {
     this.productSubject = new Subject<any>();
@@ -31,8 +31,12 @@ export class ProductsService {
     this.productsArr = this.products.snapshotChanges().map(changes => {
       return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     });
-  }
 
+    this.auctions = this.af.list('/auctions', ref => ref.orderByChild('uid'));
+    this.auctionsArr = this.auctions.snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });
+  }
 
   fetchProducts(obj) {
     if (Object.keys(obj).length) {
@@ -64,8 +68,19 @@ export class ProductsService {
     this.product.update(obj);
   }
 
+  fetchAuctions(obj) {
+    if (Object.keys(obj).length) {
+      this.auctions = this.af.list('/auctions', ref => ref.orderByChild(obj.orderByChild).equalTo(obj.equalTo));
+    }
+    this.auctionsArr = this.auctions.snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    });
+  }
+
   addAuction(obj: AuctionModel) {
     this.auctions = this.af.list('/auctions');
     this.auctions.push(obj);
   }
 }
+
+// ToDo: Enhance homepage and handle completed auction products.

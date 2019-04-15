@@ -3,7 +3,7 @@ import { UserService } from '../../services/user.service';
 import { UserModel } from '../../models/user.model';
 import { ProductsService } from '../../services/products.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import ProductModel from '../../models/product.model';
+import ProductModel, { AuctionModel } from '../../models/product.model';
 import { AngularFireList } from 'angularfire2/database';
 
 @Component({
@@ -15,7 +15,10 @@ export class HomeComponent implements OnInit {
   user: UserModel;
   products: AngularFireList<ProductModel>;
   id: String;
-  recentBids: ProductModel[];
+  productsArr: any[];
+  ongoing: any[];
+  ended: any[];
+  auctionsArr: AuctionModel[];
 
   constructor(
     private productsService: ProductsService,
@@ -24,8 +27,6 @@ export class HomeComponent implements OnInit {
     private route: ActivatedRoute
   ) {
     route.params.subscribe(params => {
-      this.id = params['id'];
-
       userService.UserObservable.subscribe(data => {
         this.user = data;
 
@@ -33,13 +34,20 @@ export class HomeComponent implements OnInit {
           this.router.navigate(['/Login']);
           return;
         }
-        productsService.fetchProducts({
-          orderByChild: 'AuctionAwardedToUID',
+        productsService.fetchProducts({});
+
+        productsService.productsArr.subscribe(result => {
+          this.productsArr = result;
+        });
+
+        productsService.fetchAuctions({
+          orderByChild: 'uid',
           equalTo: this.user.uid
         });
 
-        productsService.productsArr.subscribe(result => {
-          this.recentBids = result;
+        productsService.auctionsArr.subscribe(result => {
+          this.auctionsArr = result;
+          this.getInvolvedAuctions();
         });
       });
     });
@@ -48,4 +56,26 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  getInvolvedAuctions() {
+    this.ongoing = [];
+    this.ended = [];
+    this.auctionsArr.forEach((auction) => {
+      this.productsArr.forEach((product) => {
+        if (product.key === auction.pid) {
+          const currentDate = new Date();
+          const bidEndDate = new Date(<any>product.AutionEndTimeStamp);
+          if (bidEndDate >= currentDate) {
+            if (!this.ongoing.includes(product)) {
+              this.ongoing.push(product);
+            }
+          } else {
+            if (!this.ended.includes(product)) {
+              this.ended.push(product);
+            }
+          }
+        }
+      });
+    });
+    console.log(this.ongoing);
+  }
 }

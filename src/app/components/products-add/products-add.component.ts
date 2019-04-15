@@ -32,8 +32,8 @@ export class ProductsAddComponent implements OnInit {
       'Title': ['', Validators.required],
       'Description': ['', Validators.required],
       'Category': ['', Validators.required],
-      'AuctionEndDate': ['', Validators.required],
-      'AuctionEndTime': ['', Validators.required],
+      'AutionEndDate': ['', Validators.required],
+      'AutionEndTime': ['', Validators.required],
       'BidStartingAmount': ['', Validators.required],
     });
 
